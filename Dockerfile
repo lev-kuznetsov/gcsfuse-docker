@@ -31,7 +31,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates
   && apt-get update && apt-get install -y --no-install-recommends google-cloud-sdk gcsfuse \
   && rm -rf /var/lib/apt/lists
 
-ADD gcsfuse.autofs /etc/auto.master.d/gcsfuse.autofs
+ADD mnt.autofs /etc/auto.master.d/mnt.autofs
 
 WORKDIR /mnt
 
