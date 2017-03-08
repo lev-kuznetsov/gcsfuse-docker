@@ -29,9 +29,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates
   && echo "deb http://packages.cloud.google.com/apt gcsfuse-xenial main" | tee /etc/apt/sources.list.d/gcsfuse.list \
   && wget -qO- https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - \
   && apt-get update && apt-get install -y --no-install-recommends google-cloud-sdk gcsfuse \
-  && rm -rf /var/lib/apt/lists
+  && touch /etc/autofs/auto.gcsfuse && rm -rf /var/lib/apt/lists
 
-ADD mnt.autofs /etc/auto.master.d/mnt.autofs
+ADD auto.master /etc/auto.master
 
 WORKDIR /mnt
 
@@ -40,6 +40,5 @@ VOLUME /etc/gcloud
 VOLUME /etc/autofs
 
 ENV GOOGLE_APPLICATION_CREDENTIALS /etc/gcloud/service-account.json
-ENV BROWSE_MODE no
 
 CMD ["/usr/sbin/automount", "-t", "0", "-f", "/etc/auto.master"]
