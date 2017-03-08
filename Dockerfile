@@ -29,7 +29,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates
   && echo "deb http://packages.cloud.google.com/apt gcsfuse-xenial main" | tee /etc/apt/sources.list.d/gcsfuse.list \
   && wget -qO- https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - \
   && apt-get update && apt-get install -y --no-install-recommends google-cloud-sdk gcsfuse \
-  && touch /etc/autofs/auto.gcsfuse && rm -rf /var/lib/apt/lists
+  && mkdir -p /etc/autofs && touch /etc/autofs/auto.gcsfuse && rm -rf /var/lib/apt/lists
 
 ADD auto.master /etc/auto.master
 
